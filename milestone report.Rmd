@@ -1,0 +1,77 @@
+---
+title: "Captstone Milestone Report"
+author: "Jennifer Levy"
+date: "May 3, 2017"
+output: html_document
+---
+```{r setup, include=FALSE,eval=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+_______________________________________________________________________________________________________
+## **Download datasets**
+The dataset location was provided in the Supplemental Material for Task 0 on the Coursera class website
+_______________________________________________________________________________________________________
+```
+fileURL<-"https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip"
+download.file(fileURL,destfile="./Coursera.zip")
+unzip("./Coursera.zip")
+
+```
+_____________________________________________________________________________
+##**Randomly subsample the datasets and save as a new file **
+_____________________________________________________________________________
+The downloaded datasets are very large in size and hard to work with in R.
+In order to explore the data and build a predictive model, all inital work will 
+be completed on a small subsample of the datasets. Initially, the subsample size was 60% of each file 
+however that was too large to perform R tasks in a timely manner. Therefore sample dataset size was reduced to 
+10% of each dataset. 
+
+###Load files and subsample the data. Save as new file.
+```
+set.seed(35)
+# TWITTER FILE
+con <- file("en_US.twitter.txt", "r") 
+file<-readLines(con)
+#how many lines are in the file
+nlines <-length(file)
+# randomly sample 1% of the data file
+sample<-sort(sample(1:nlines, nlines * 0.1, replace=FALSE))
+twitter<- twitter[sample]
+#save as csv file
+write.csv(twitter, file = "twitter1.csv")
+# close the connection
+close(con)
+
+# BLOGS FILE
+con <- file("en_US.blogs.txt", "r") 
+#Find out how many lines are in the file
+nlines <-length(readLines(con))
+#create a separate sub-sample dataset 
+blogs<- lines[sample(1:nlines, nlines * 0.1, replace=FALSE)]
+#save as csv file
+write.csv(blogs1, file = "blogs1.csv")
+# close the connection
+close(con)
+
+# NEWS FILE
+con <- file("en_US.news.txt", "r") 
+#How many lines are in the file
+nlines <-length(readLines(con, warn=FALSE))
+#create a separate sub-sample dataset 
+news<- lines[sample(1:nlines, nlines * 0.1, replace=FALSE)]
+#save as csv file
+write.csv(news1, file = "news1.csv")
+# close the connection
+close(con)
+
+```
+
+_____________________________________________________________________________
+##**Check the new file **
+_____________________________________________________________________________
+
+
+```{r eval=TRUE, echo=TRUE}
+
+getwd()
+```
